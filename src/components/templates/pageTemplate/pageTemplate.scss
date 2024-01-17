@@ -1,0 +1,25 @@
+@import "../../../variables.scss";
+
+.page {
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    "page-header page-header page-header"
+    "page-content page-content page-content"
+    "page-content page-content page-content";
+
+  .page-header {
+    background-color: $primary-color;
+    grid-area: page-header;
+  }
+
+  .page-content {
+    background-color: rgb(31, 31, 31);
+    background-image: url("../../../../public/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    grid-area: page-content;
+  }
+}

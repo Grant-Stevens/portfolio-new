@@ -1,0 +1,54 @@
+@import "../../../variables.scss";
+
+.nav-bar {
+  display: grid;
+  grid-template-areas: "logo nav-list";
+  grid-template-columns: 40% auto;
+  padding: 16px 16px 0 0;
+  border-bottom: 4px solid $secondar-color;
+
+  .name-brand {
+    grid-area: logo;
+    position: relative;
+    background-color: lighten($primary-color, 10%);
+    display: flex;
+    justify-content: center;
+    padding: 0 16px;
+    border-radius: 0 4px 0 0;
+  }
+
+  &__list {
+    align-items: flex-end;
+    grid-area: nav-list;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    font-size: 14px;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  &__item {
+    cursor: pointer;
+    padding: 8px 24px 6px;
+    border-bottom: 2px solid transparent;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    transition: box-shadow 0.3s, background-color 0.3s;
+    transition-timing-function: ease-in;
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      box-shadow: 0px 8px 20px -14px darken($primary-color, 25%);
+      background-color: lighten($primary-color, 5%);
+    }
+
+    &.active {
+      border-bottom: 2px solid yellow;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+}

@@ -19,6 +19,7 @@ const NavBar = () => {
         {pages &&
           pages.map((page) => (
             <Link
+              key={page}
               className={`nav-bar__item ${
                 pathname.includes(page) ? "active" : ""
               }`}

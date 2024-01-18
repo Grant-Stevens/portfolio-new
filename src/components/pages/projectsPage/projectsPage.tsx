@@ -4,7 +4,7 @@ import PageTemplate from "../../templates/pageTemplate";
 const ProjectsPage = () => {
   return (
     <PageTemplate>
-      <div>education page</div>
+      <div>projects page</div>
     </PageTemplate>
   );
 };

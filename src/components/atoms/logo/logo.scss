@@ -1,4 +1,20 @@
 .name-brand {
-    font-size: 64px;
-    font-family: 'Open Sans';
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 600;
+  color: grey;
+  font-family: "Open Sans";
+  letter-spacing: 0.2em;
+}
+
+.brand {
+  max-height: 120px;
+  padding: 16px;
 }

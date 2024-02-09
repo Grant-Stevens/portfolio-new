@@ -1,65 +1,130 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
+// import webpack from "webpack";
+// import path from "path";
+// import HtmlWebpackPlugin from "html-webpack-plugin";
+// import { fileURLToPath } from "url";
+
+// const __filename = fileURLToPath(import.meta.url);
+// const isProduction = process.env.NODE_ENV === "production";
+// const ASSET_PATH = process.env.ASSET_PATH || "/";
+// const __dirname = path.dirname(__filename);
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const isProduction = process.env.NODE_ENV == "production";
-
-const stylesHandler = MiniCssExtractPlugin.loader;
-
-const config = {
+module.exports = {
   entry: "./src/index.tsx",
   target: "node",
   output: {
-    path: path.resolve(__dirname, "dist"),
-  },
-  devServer: {
-    open: true,
-    host: "localhost",
+    filename: "main.js",
+    path: path.resolve(__dirname, "build"),
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: "index.html",
-    // }),
-
-    new MiniCssExtractPlugin(),
-
-    // Add your plugins here
-    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, "public", "index.html"),
+    }),
   ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "build"),
+    },
+    port: 3000,
+  },
   module: {
+    // exclude node_modules
     rules: [
       {
-        test: /\.(ts|tsx)$/i,
-        loader: "ts-loader",
-        exclude: ["/node_modules/"],
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ["babel-loader"],
+      },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [stylesHandler, "css-loader", "postcss-loader", "sass-loader"],
+        use: [
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+        ],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: "asset",
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
       },
-      { test: /\.(png|jpg)$/, use: [{ loader: "url-loader?limit=8192" }] },
-
-      // Add your rules for custom modules here
-      // Learn more about loaders from https://webpack.js.org/loaders/
     ],
   },
+  // pass all js files through Babel
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", "..."],
-    modules: ["node_modules"],
+    extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
   },
 };
 
-module.exports = () => {
-  if (isProduction) {
-    config.mode = "production";
-  } else {
-    config.mode = "development";
-  }
-  return config;
-};
+// const config = {
+//   entry: path.join(__dirname, "src", "index.tsx"),
+//   target: "node",
+//   output: {
+//     filename: "main.js",
+//     path: path.resolve(__dirname, "dist"),
+//     publicPath: ASSET_PATH,
+//   },
+//   plugins: [
+//     new HtmlWebpackPlugin({
+//       template: path.join(__dirname, "src", "index.html"),
+//     }),
+//     new webpack.DefinePlugin({
+//       "process.env.ASSET_PATH": JSON.stringify(ASSET_PATH),
+//     }),
+//   ],
+//   resolve: {
+//     extensions: [".tsx", ".ts", ".js", ".jsx", ".json"],
+//   },
+//   module: {
+//     rules: [
+//       { test: /\.txt$/, use: "raw-loader" },
+//       {
+//         test: /\.tsx?$/,
+//         use: "ts-loader",
+//         exclude: /node_modules/,
+//       },
+//       {
+//         test: /\.s[ac]ss$/i,
+//         use: [
+//           // Creates `style` nodes from JS strings
+//           "style-loader",
+//           // Translates CSS into CommonJS
+//           "css-loader",
+//           // Compiles Sass to CSS
+//           "sass-loader",
+//         ],
+//       },
+//       {
+//         test: /\.(png|jpe?g|gif)$/i,
+//         use: [
+//           {
+//             loader: "file-loader",
+//           },
+//         ],
+//       },
+//       {
+//         test: /\.html$/i,
+//         loader: "html-loader",
+//       },
+//     ],
+//   },
+// };
+
+// if (isProduction) {
+//   config.mode = "production";
+// } else {
+//   config.mode = "development";
+// }

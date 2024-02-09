@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "./components/pages/landingPage";
 import IntroPage from "./components/pages/introPage";
 import ProjectsPage from "./components/pages/projectsPage";
@@ -9,7 +9,7 @@ import ExperiencePage from "./components/pages/experiencePage";
 import ContactMePage from "./components/pages/contactMePage";
 import EducationPage from "./components/pages/educationPage";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <LandingPage />,
